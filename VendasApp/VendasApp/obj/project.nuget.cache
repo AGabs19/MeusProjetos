@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "IvkIsnWSzGy2opp8Fr1ou0wxVlKIaHQC/FoQV4DCWev7+s6AhDpXk57tAmOPjmzaV+Agdg+ZXzW1JIiwO69aGA==",
+  "dgSpecHash": "8oDIsmf9CXYx1lzAxOZ5ml6xD+EnEkEUEbOJYk75ePzoMaXTF7DovSZOiqpkuk30wAy6koedRjm1H5wUP9u1wg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\VendasApp.csproj",
+  "projectFilePath": "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\VendasApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\anaga\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\anaga\\.nuget\\packages\\messagepack\\2.1.152\\messagepack.2.1.152.nupkg.sha512",

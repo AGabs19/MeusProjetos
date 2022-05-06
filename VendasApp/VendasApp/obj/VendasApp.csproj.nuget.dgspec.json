@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\VendasApp.csproj": {}
+    "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\VendasApp.csproj": {}
   },
   "projects": {
-    "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\VendasApp.csproj": {
+    "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\VendasApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\VendasApp.csproj",
+        "projectUniqueName": "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\VendasApp.csproj",
         "projectName": "VendasApp",
-        "projectPath": "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\VendasApp.csproj",
+        "projectPath": "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\VendasApp.csproj",
         "packagesPath": "C:\\Users\\anaga\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\anaga\\MeusProjetos\\VendasAPP\\VendasApp\\obj\\",
+        "outputPath": "C:\\Users\\anaga\\MeusProjetos\\VendasApp\\VendasApp\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
