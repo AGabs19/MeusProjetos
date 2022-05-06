@@ -3,6 +3,7 @@ using VendasApp.Models;
 using VendasApp.Services;
 using VendasApp.Models.ViewModels;
 using VendasApp.Services.Exceptions;
+using System.Diagnostics;
 
 namespace VendasApp.Controllers
 {
@@ -32,20 +33,20 @@ namespace VendasApp.Controllers
         {
             _vendedorService.Insert(vendedor);
             return RedirectToAction(nameof(Index));
-           // return RedirectToAction("Index"); //Estou redirecionando para minha tela posso escrever desse jeito tambem!
+            // return RedirectToAction("Index"); //Estou redirecionando para minha tela posso escrever desse jeito tambem!
         }
         public IActionResult Delete(int? id) // ? significa que é opcional 
         {
             if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
             {
-                return NotFound(); //Lembrar de personalizar o aviso do erro
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" }); //Lembrar de personalizar o aviso do erro
             }
 
             var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
 
-            if( obj == null) //Se o Id não existir
+            if (obj == null) //Se o Id não existir
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
             //Se até aqui tudo deu certo, eu quero que retorne esse obj 
             return View(obj);
@@ -61,57 +62,72 @@ namespace VendasApp.Controllers
         {
             if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
             {
-                return NotFound(); //Lembrar de personalizar o aviso do erro
+                return RedirectToAction(nameof(Error), new {message = "Id não foi fornecido"}); //Lembrar de personalizar o aviso do erro
             }
 
             var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
 
             if (obj == null) //Se o Id não existir
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
             //Se até aqui tudo deu certo, eu quero que retorne esse obj 
             return View(obj);
         }
-        public IActionResult Edit(int? id) 
-        { 
-            if( id == null) //Testando se existe 
+        public IActionResult Edit(int? id)
+        {
+            if (id == null) //Testando se existe 
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
             var obj = _vendedorService.FindById(id.Value);
-            if(obj == null) //Testando se existe 
+            if (obj == null) //Testando se existe 
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
             //Se passar pelos if, vou abrir a tela de edição:
 
-            List<Departamento> departamentos = _departamentoService.FindAll(); 
+            List<Departamento> departamentos = _departamentoService.FindAll();
             VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos }; //Obj é o obj que buscamos no banco de dados (escrito logo acima no if)
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id, Vendedor vendedor )
+        public IActionResult Edit(int? id, Vendedor vendedor)
         {
-            if(id != vendedor.Id)
+            if (id != vendedor.Id) //Quando o Id for diferente
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id não corresponde" });
             }
             try
             {
                 _vendedorService.Update(vendedor);
                 return RedirectToAction(nameof(Index));
             }
-            catch (NotFoundException) //Minhas Exception personalizadas
+            catch (ApplicationException e) //Para não repetir as duas, chamei uma super Exception e dei um apelido para ela
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException) //Se tambem ocorrer essa Excepition
+
+            //catch (NotFoundException e) //Minhas Exception personalizadas
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = e.Message });
+            //}
+            //catch (DbConcurrencyException e) //Se tambem ocorrer essa Excepition
+            //{
+            //    return RedirectToAction(nameof(Error), new { message = e.Message });
+            //}
+        }
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel //Instanciei
             {
-                return BadRequest();
-            }
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier //É uma forma de solicitar o Id interno da requisição
+                // ?? == Se ele for nulo quero no lugar o HttpContext.TraceIdentifier 
+            };
+            return View(viewModel);
         }
     }
 }
