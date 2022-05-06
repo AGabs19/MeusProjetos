@@ -1,6 +1,7 @@
 ﻿using VendasApp.DataBase;
 using VendasApp.Models;
 using Microsoft.EntityFrameworkCore;
+using VendasApp.Services.Exceptions;
 
 namespace VendasApp.Services
 {
@@ -35,5 +36,24 @@ namespace VendasApp.Services
             _context.Vendedor.Remove(obj); //Assim eu removo o obj do BDSet
             _context.SaveChanges(); //Aqui eu salvo essa alteração no meu banco de dados e assim o objeto fica totslmente removido!
         }
+        public void Update(Vendedor obj)  //Atualizar um vendedor
+        {
+            if (!_context.Vendedor.Any(x => x.Id == obj.Id))   //se nãooooo EXISTIR ! Any serve para para vê se existe registro no banco de dados com a condição lambida
+            {
+                throw new NotFoundException("Id não encontrado");
+            }
+            try //Se passar pelo if, então solicita a Atualização
+            {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch (DbConcurrencyException e)
+            {
+                throw new DbConcurrencyException(e.Message);
+            }
+            //Se meu banco de dados der conflito de ambiguidade, a minha exception vai lançar um aviso, pois vai pegar o aviso do banco e transformar em um aviso meu, da minha exception!!!
+        }  
+          
+       
     }
 }

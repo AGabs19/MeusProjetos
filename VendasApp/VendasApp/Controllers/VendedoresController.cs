@@ -2,6 +2,7 @@
 using VendasApp.Models;
 using VendasApp.Services;
 using VendasApp.Models.ViewModels;
+using VendasApp.Services.Exceptions;
 
 namespace VendasApp.Controllers
 {
@@ -71,6 +72,46 @@ namespace VendasApp.Controllers
             }
             //Se até aqui tudo deu certo, eu quero que retorne esse obj 
             return View(obj);
+        }
+        public IActionResult Edit(int? id) 
+        { 
+            if( id == null) //Testando se existe 
+            {
+                return NotFound();
+            }
+
+            var obj = _vendedorService.FindById(id.Value);
+            if(obj == null) //Testando se existe 
+            {
+                return NotFound();
+            }
+            //Se passar pelos if, vou abrir a tela de edição:
+
+            List<Departamento> departamentos = _departamentoService.FindAll(); 
+            VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos }; //Obj é o obj que buscamos no banco de dados (escrito logo acima no if)
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int? id, Vendedor vendedor )
+        {
+            if(id != vendedor.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _vendedorService.Update(vendedor);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException) //Minhas Exception personalizadas
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException) //Se tambem ocorrer essa Excepition
+            {
+                return BadRequest();
+            }
         }
     }
 }
