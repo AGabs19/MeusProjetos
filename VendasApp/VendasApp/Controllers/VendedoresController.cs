@@ -33,5 +33,28 @@ namespace VendasApp.Controllers
             return RedirectToAction(nameof(Index));
            // return RedirectToAction("Index"); //Estou redirecionando para minha tela posso escrever desse jeito tambem!
         }
+        public IActionResult Delete(int? id) // ? significa que é opcional 
+        {
+            if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
+            {
+                return NotFound(); //Lembrar de personalizar o aviso do erro
+            }
+
+            var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
+
+            if( obj == null) //Se o Id não existir
+            {
+                return NotFound();
+            }
+            //Se até aqui tudo deu certo, eu quero que retorne esse obj 
+            return View(obj);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _vendedorService.Remove(id);
+            return RedirectToAction(nameof(Index)); //Para redirecionar
+        }
     }
 }
