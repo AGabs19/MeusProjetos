@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace VendasApp.Migrations
 {
-    public partial class InitialMigrations : Migration
+    public partial class VendasApp : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -46,7 +46,7 @@ namespace VendasApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegistroDeVenda",
+                name: "RegistroDeVendas",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -58,9 +58,9 @@ namespace VendasApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegistroDeVenda", x => x.Id);
+                    table.PrimaryKey("PK_RegistroDeVendas", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RegistroDeVenda_Vendedor_VendedorId",
+                        name: "FK_RegistroDeVendas_Vendedor_VendedorId",
                         column: x => x.VendedorId,
                         principalTable: "Vendedor",
                         principalColumn: "Id",
@@ -68,8 +68,8 @@ namespace VendasApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegistroDeVenda_VendedorId",
-                table: "RegistroDeVenda",
+                name: "IX_RegistroDeVendas_VendedorId",
+                table: "RegistroDeVendas",
                 column: "VendedorId");
 
             migrationBuilder.CreateIndex(
@@ -81,7 +81,7 @@ namespace VendasApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RegistroDeVenda");
+                name: "RegistroDeVendas");
 
             migrationBuilder.DropTable(
                 name: "Vendedor");

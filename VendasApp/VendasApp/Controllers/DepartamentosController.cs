@@ -14,10 +14,11 @@ namespace VendasApp.Controllers
     public class DepartamentosController : Controller
     {
         private readonly VendasAppContext _context;
-
-        public DepartamentosController(VendasAppContext context)
+        private readonly PopularService _popularService;
+        public DepartamentosController(VendasAppContext context, PopularService popularService)
         {
             _context = context;
+            _popularService = popularService;
         }
 
         // GET: Departamentos

@@ -1,4 +1,36 @@
-﻿@{
-    ViewData["Title"] = "Index";
+﻿@model IEnumerable<VendasApp.Models.Vendedor>
+@{
+    ViewData["Title"] = "Vendedor";
 }
-<h2>Vendedores</h2>
+<h2>@ViewData["Title"]</h2>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Criar um Novo</a>
+</p>
+
+<table class="table table-striped table-hover">
+    <thead>
+        <tr class="sucess">
+            <th>@Html.DisplayNameFor(model => model.Nome)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Aniversario)</th>
+            <th>@Html.DisplayNameFor(model => model.SalarioBase)</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(ModelItem => item.Nome)</td>
+                <td>@Html.DisplayFor(ModelItem => item.Email)</td>
+                <td>@Html.DisplayFor(ModelItem => item.Aniversario)</td>
+                <td>@Html.DisplayFor(ModelItem => item.SalarioBase)</td>
+                <td>
+                    <a asp-action="Editar" asp-route-id="@item.Id">Editar</a>
+                    <a asp-action="Detalhes" asp-route-id="@item.Id">Detalhes</a>
+                    <a asp-action="Deletar" asp-route-id="@item.Id">Deletar</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

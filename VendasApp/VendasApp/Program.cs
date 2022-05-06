@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using VendasApp.DataBase;
-
+using VendasApp.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +16,7 @@ builder.Services.AddDbContext<VendasAppContext>(options => options.UseSqlServer(
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddScoped<PopularService>();
+builder.Services.AddScoped<VendedorService>();
 
 //var PopularService = new PopularService();
 var app = builder.Build();

@@ -10,8 +10,9 @@ namespace VendasApp.Models
         public string Nome { get; set; }
         public string Email { get; set; }
         public DateTime Aniversario { get; set; }
-        public double SalarioBase { get; set;}
-        public Departamento Departamento { get; set; } //Ligação Vendedor possui 1 Departamento
+        public double SalarioBase { get; set; }
+        public virtual Departamento Departamento { get; set; } //Ligação Vendedor possui 1 Departamento
+        public int DepartamentoId {get; set;}
         public ICollection<RegistroDeVenda> Vendas { get; set; } = new List<RegistroDeVenda>(); //Ligação para muitos 
 
         public Vendedor()

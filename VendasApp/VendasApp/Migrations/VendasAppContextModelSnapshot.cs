@@ -63,7 +63,7 @@ namespace VendasApp.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("RegistroDeVenda");
+                    b.ToTable("RegistroDeVendas");
                 });
 
             modelBuilder.Entity("VendasApp.Models.Vendedor", b =>

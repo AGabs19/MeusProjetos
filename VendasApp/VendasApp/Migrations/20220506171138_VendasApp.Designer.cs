@@ -12,8 +12,8 @@ using VendasApp.DataBase;
 namespace VendasApp.Migrations
 {
     [DbContext(typeof(VendasAppContext))]
-    [Migration("20220506122342_InitialMigrations")]
-    partial class InitialMigrations
+    [Migration("20220506171138_VendasApp")]
+    partial class VendasApp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -65,7 +65,7 @@ namespace VendasApp.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("RegistroDeVenda");
+                    b.ToTable("RegistroDeVendas");
                 });
 
             modelBuilder.Entity("VendasApp.Models.Vendedor", b =>
