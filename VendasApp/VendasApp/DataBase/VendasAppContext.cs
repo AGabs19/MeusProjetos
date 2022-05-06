@@ -13,9 +13,11 @@ namespace VendasApp.DataBase
         public VendasAppContext (DbContextOptions<VendasAppContext> options)
             : base(options)
         {
-
+            //Ligação com o banco de dados, program.cs e appsettings.json contém as ligações
         }
 
         public DbSet<Departamento> Departamento { get; set; }
+        public DbSet<Vendedor> Vendedor { get; set; }
+        public DbSet<RegistroDeVenda> RegistroDeVendas { get; set; }
     }
 }

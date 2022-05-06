@@ -1,7 +1,11 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using VendasApp.DataBase;
+
+
 var builder = WebApplication.CreateBuilder(args);
+
+//Abaixo minha ligação com banco de dados
 builder.Services.AddDbContext<VendasAppContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("VendasApp") ?? throw new InvalidOperationException("Connection string 'VendasAppContext' not found."))); //.ToString()));
                                                                                                                                                                                                                                     //Conexão com Banco de Dados
 
@@ -11,15 +15,29 @@ builder.Services.AddDbContext<VendasAppContext>(options => options.UseSqlServer(
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+builder.Services.AddScoped<PopularService>();
+
+//var PopularService = new PopularService();
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();
+    //PopularService.Popular();
+    
+}
+else
+{
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//if (!app.Environment.IsDevelopment())
+//{
+//    app.UseExceptionHandler("/Home/Error");
+   
+//    app.UseHsts();
+//}
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
