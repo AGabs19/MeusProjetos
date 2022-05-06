@@ -56,5 +56,21 @@ namespace VendasApp.Controllers
             _vendedorService.Remove(id);
             return RedirectToAction(nameof(Index)); //Para redirecionar
         }
+        public IActionResult Details(int? id) //LOgica muito parecida com o Delete
+        {
+            if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
+            {
+                return NotFound(); //Lembrar de personalizar o aviso do erro
+            }
+
+            var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
+
+            if (obj == null) //Se o Id não existir
+            {
+                return NotFound();
+            }
+            //Se até aqui tudo deu certo, eu quero que retorne esse obj 
+            return View(obj);
+        }
     }
 }

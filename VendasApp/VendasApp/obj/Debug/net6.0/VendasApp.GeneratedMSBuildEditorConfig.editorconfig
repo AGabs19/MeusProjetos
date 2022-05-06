@@ -8,69 +8,73 @@ build_property.PlatformNeutralAssembly =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = VendasApp
 build_property.RootNamespace = VendasApp
-build_property.ProjectDir = C:\Users\anaga\MeusProjetos\VendasApp\VendasApp\
+build_property.ProjectDir = C:\Users\anaga\MeusProjetos\VendasAPP\VendasApp\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\anaga\MeusProjetos\VendasApp\VendasApp
+build_property.MSBuildProjectDirectory = C:\Users\anaga\MeusProjetos\VendasAPP\VendasApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Departamentos/Create.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Departamentos/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0YW1lbnRvc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Departamentos/Delete.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Departamentos/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0YW1lbnRvc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Departamentos/Details.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Departamentos/Details.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0YW1lbnRvc1xEZXRhaWxzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Departamentos/Edit.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Departamentos/Edit.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0YW1lbnRvc1xFZGl0LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Departamentos/Index.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Departamentos/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVwYXJ0YW1lbnRvc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Home/Index.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Home/Privacy.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Shared/Error.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Vendedores/Create.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Vendedores/Create.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGVkb3Jlc1xDcmVhdGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Vendedores/Delete.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Vendedores/Delete.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGVkb3Jlc1xEZWxldGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Vendedores/Index.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Vendedores/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGVkb3Jlc1xEZXRhaWxzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Vendedores/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVmVuZGVkb3Jlc1xJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/_ViewImports.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/_ViewStart.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/anaga/MeusProjetos/VendasApp/VendasApp/Views/Shared/_Layout.cshtml]
+[C:/Users/anaga/MeusProjetos/VendasAPP/VendasApp/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-xwflnq5whp

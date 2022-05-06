@@ -1,5 +1,6 @@
 ﻿using VendasApp.DataBase;
 using VendasApp.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace VendasApp.Services
 {
@@ -22,7 +23,11 @@ namespace VendasApp.Services
         }
         public Vendedor FindById(int id) //Estou pedindo para localizar pelo Id 
         {
-            return _context.Vendedor.FirstOrDefault(obj => obj.Id == id); //Usando o metodo FirstOrDefault e lambida (Linq)
+            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id); //Usando o metodo FirstOrDefault e lambida (Linq)
+            //Include coloquei apos a criaçaõ da opção (model.Departamento.Nome) em Details.cshtml;
+            //Eu estou incluindo o Departamento, ele faz join e busca o departamento!
+            //É assim que faz eager loading;
+            //Eager loading = Carregar outros objetos associados ao objeto principal por isso a inclusão;
         }
         public void Remove(int id) 
         {
