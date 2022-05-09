@@ -28,7 +28,7 @@ namespace VendasApp.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Nome = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Aniversario = table.Column<DateTime>(type: "datetime2", nullable: false),
                     SalarioBase = table.Column<double>(type: "float", nullable: false),
@@ -46,7 +46,7 @@ namespace VendasApp.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "RegistroDeVendas",
+                name: "RegistroDeVenda",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
@@ -58,9 +58,9 @@ namespace VendasApp.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_RegistroDeVendas", x => x.Id);
+                    table.PrimaryKey("PK_RegistroDeVenda", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_RegistroDeVendas_Vendedor_VendedorId",
+                        name: "FK_RegistroDeVenda_Vendedor_VendedorId",
                         column: x => x.VendedorId,
                         principalTable: "Vendedor",
                         principalColumn: "Id",
@@ -68,8 +68,8 @@ namespace VendasApp.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_RegistroDeVendas_VendedorId",
-                table: "RegistroDeVendas",
+                name: "IX_RegistroDeVenda_VendedorId",
+                table: "RegistroDeVenda",
                 column: "VendedorId");
 
             migrationBuilder.CreateIndex(
@@ -81,7 +81,7 @@ namespace VendasApp.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "RegistroDeVendas");
+                name: "RegistroDeVenda");
 
             migrationBuilder.DropTable(
                 name: "Vendedor");

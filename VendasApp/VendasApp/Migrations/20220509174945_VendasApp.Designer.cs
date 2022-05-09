@@ -12,7 +12,7 @@ using VendasApp.DataBase;
 namespace VendasApp.Migrations
 {
     [DbContext(typeof(VendasAppContext))]
-    [Migration("20220506171138_VendasApp")]
+    [Migration("20220509174945_VendasApp")]
     partial class VendasApp
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -65,7 +65,7 @@ namespace VendasApp.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("RegistroDeVendas");
+                    b.ToTable("RegistroDeVenda");
                 });
 
             modelBuilder.Entity("VendasApp.Models.Vendedor", b =>
@@ -88,7 +88,8 @@ namespace VendasApp.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<double>("SalarioBase")
                         .HasColumnType("float");

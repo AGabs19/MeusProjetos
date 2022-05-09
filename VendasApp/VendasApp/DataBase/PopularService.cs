@@ -20,7 +20,7 @@ namespace VendasApp.DataBase
         {
             if (_context.Departamento.Any() || //Se já existe dados no meu banco de dados não faça nada
                 _context.Vendedor.Any() || //Operação Any para vê se contem elementos
-                _context.RegistroDeVendas.Any())
+                _context.RegistroDeVenda.Any())
             {
                 return; //Se já existir, dados não precisa fazer nada!
             }
@@ -66,7 +66,7 @@ namespace VendasApp.DataBase
 
             _context.Vendedor.AddRange(v1, v2, v3, v4, v5, v6);
 
-            _context.RegistroDeVendas.AddRange(r1, r2, r3, r4, r5, r6,r7, r8, r9, r10, r11,r12, r13, r14, r15, r16, r17, r18, r19);
+            _context.RegistroDeVenda.AddRange(r1, r2, r3, r4, r5, r6,r7, r8, r9, r10, r11,r12, r13, r14, r15, r16, r17, r18, r19);
 
             _context.SaveChanges(); //Ele vai salvar e confirma as alterações no banco de dados!
 

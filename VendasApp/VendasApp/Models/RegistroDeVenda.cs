@@ -1,12 +1,17 @@
 ﻿using VendasApp.Models.Enums;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VendasApp.Models
 {
     public class RegistroDeVenda
     {
         public int Id { get; set; }
+
+       [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Data { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:F2}")]
         public double Quantia { get; set; }
         public VendasStatus Status { get; set; }
         public Vendedor Vendedor { get; set; } //Ligação de 1 para 1

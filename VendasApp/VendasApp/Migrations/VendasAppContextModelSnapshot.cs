@@ -63,7 +63,7 @@ namespace VendasApp.Migrations
 
                     b.HasIndex("VendedorId");
 
-                    b.ToTable("RegistroDeVendas");
+                    b.ToTable("RegistroDeVenda");
                 });
 
             modelBuilder.Entity("VendasApp.Models.Vendedor", b =>
@@ -86,7 +86,8 @@ namespace VendasApp.Migrations
 
                     b.Property<string>("Nome")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<double>("SalarioBase")
                         .HasColumnType("float");
