@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace VendasApp.Models
 {
@@ -8,9 +9,18 @@ namespace VendasApp.Models
     {
         public int Id { get; set; }
         public string Nome { get; set; }
+
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")] //Dia/Mês/Ano
         public DateTime Aniversario { get; set; }
+
+        [Display(Name = "Salario Base")]
+        [DisplayFormat(DataFormatString = "{0:F2}")] //Determinando o formato de duas casas decimais!!!
         public double SalarioBase { get; set; }
+
         public virtual Departamento Departamento { get; set; } //Ligação Vendedor possui 1 Departamento
         public int DepartamentoId {get; set;}
         public ICollection<RegistroDeVenda> Vendas { get; set; } = new List<RegistroDeVenda>(); //Ligação para muitos 

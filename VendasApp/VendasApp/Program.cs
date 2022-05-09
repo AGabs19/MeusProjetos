@@ -2,6 +2,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using VendasApp.DataBase;
 using VendasApp.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,14 +21,21 @@ builder.Services.AddScoped<PopularService>();
 builder.Services.AddScoped<VendedorService>();
 builder.Services.AddScoped<DepartamentoService>();
 
-//var PopularService = new PopularService();
 var app = builder.Build();
+var PopularService = new PopularService();
+var enUS = new CultureInfo("en-US");
+var localizationOptions = new RequestLocalizationOptions //Para trocar a Localização
+{
+    DefaultRequestCulture = new RequestCulture(enUS),
+    SupportedCultures = new List<CultureInfo> { enUS },
+    SupportedUICultures = new List<CultureInfo> { enUS }
+};
+app.UseRequestLocalization(localizationOptions); 
 
 if (!app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-    //PopularService.Popular();
-    
+    PopularService.Popular();
 }
 else
 {
