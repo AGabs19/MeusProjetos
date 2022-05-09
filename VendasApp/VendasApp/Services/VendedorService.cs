@@ -33,9 +33,17 @@ namespace VendasApp.Services
         }
         public async Task RemoveAsync(int id) 
         {
-            var obj = await _context.Vendedor.FindAsync(id);
-            _context.Vendedor.Remove(obj); //Assim eu removo o obj do BDSet
-            await _context.SaveChangesAsync(); //Aqui eu salvo essa alteração no meu banco de dados e assim o objeto fica totslmente removido!
+            try
+            {
+                var obj = await _context.Vendedor.FindAsync(id);
+                _context.Vendedor.Remove(obj); //Assim eu removo o obj do BDSet
+                await _context.SaveChangesAsync(); //Aqui eu salvo essa alteração no meu banco de dados e assim o objeto fica totslmente removido!
+            }
+            catch(DbUpdateException e)
+            {
+                throw new IntegrityException("Não foi possivel deletar o vendedor, pois ele tem vendas!");
+            }
+          
         }
         public async Task UpdateAsync(Vendedor obj)  //Atualizar um vendedor
         {
