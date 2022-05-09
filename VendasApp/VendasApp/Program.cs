@@ -20,6 +20,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddScoped<PopularService>();
 builder.Services.AddScoped<VendedorService>();
 builder.Services.AddScoped<DepartamentoService>();
+builder.Services.AddScoped<RegistroDeVendaService>();
 
 var app = builder.Build();
 var PopularService = new PopularService();
