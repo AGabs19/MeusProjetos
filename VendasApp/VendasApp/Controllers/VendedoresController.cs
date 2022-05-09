@@ -31,6 +31,12 @@ namespace VendasApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Vendedor vendedor)
         {
+            if (!ModelState.IsValid) //Se NÃO for validado meu modelo, então retorna meu obj, até o usuario preencher direitinho a View!
+            {
+                var departamentos = _departamentoService.FindAll();
+                var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
+                return View(viewModel);
+            }
             _vendedorService.Insert(vendedor);
             return RedirectToAction(nameof(Index));
             // return RedirectToAction("Index"); //Estou redirecionando para minha tela posso escrever desse jeito tambem!
@@ -96,6 +102,13 @@ namespace VendasApp.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int? id, Vendedor vendedor)
         {
+            if (!ModelState.IsValid) //Se NÃO for validado meu modelo, então retorna meu obj, até o usuario preencher direitinho a View!
+            {
+                var departamentos = _departamentoService.FindAll();
+                var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
+                return View(viewModel);
+            }
+
             if (id != vendedor.Id) //Quando o Id for diferente
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não corresponde" });
