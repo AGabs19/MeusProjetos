@@ -16,39 +16,39 @@ namespace VendasApp.Controllers
             _vendedorService = vendedorService;
             _departamentoService = departamentoService;
         }
-        public IActionResult Index() //Ele vai chamar a operação FindAll do meu Vendedor Service!
+        public async Task<IActionResult> Index() //Ele vai chamar a operação FindAll do meu Vendedor Service!
         {
-            var list = _vendedorService.FindAll();
+            var list = await _vendedorService.FindAllAsync();
             return View(list);
         }
-        public IActionResult Create() //Metodo que vai abrir meu formulario para cadastro de novos vendedores
+        public async Task<IActionResult> Create() //Metodo que vai abrir meu formulario para cadastro de novos vendedores
         {
-            var departamentos = _departamentoService.FindAll(); //Para ele buscar no banco de dados todos os departamentos!
+            var departamentos = await _departamentoService.FindAllAsync(); //Para ele buscar no banco de dados todos os departamentos!
             var viewModel = new VendedorFormViewModel { Departamentos = departamentos }; //É o que tem no View Model, departamentos e vendedor;
             return View(viewModel);// Pedindo retorno da lista de Departamentos 
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Vendedor vendedor)
+        public async Task<IActionResult> Create(Vendedor vendedor)
         {
             if (!ModelState.IsValid) //Se NÃO for validado meu modelo, então retorna meu obj, até o usuario preencher direitinho a View!
             {
-                var departamentos = _departamentoService.FindAll();
+                var departamentos = await _departamentoService.FindAllAsync();
                 var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
                 return View(viewModel);
             }
-            _vendedorService.Insert(vendedor);
+            await _vendedorService.InsertAsync(vendedor);
             return RedirectToAction(nameof(Index));
             // return RedirectToAction("Index"); //Estou redirecionando para minha tela posso escrever desse jeito tambem!
         }
-        public IActionResult Delete(int? id) // ? significa que é opcional 
+        public async Task<IActionResult> Delete(int? id) // ? significa que é opcional 
         {
             if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" }); //Lembrar de personalizar o aviso do erro
             }
 
-            var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
+            var obj = await _vendedorService.FindByIdAsync(id.Value); //Ele é um valor opcional
 
             if (obj == null) //Se o Id não existir
             {
@@ -59,19 +59,19 @@ namespace VendasApp.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _vendedorService.Remove(id);
+            await _vendedorService.RemoveAsync(id);
             return RedirectToAction(nameof(Index)); //Para redirecionar
         }
-        public IActionResult Details(int? id) //LOgica muito parecida com o Delete
+        public async Task<IActionResult> Details(int? id) //LOgica muito parecida com o Delete
         {
             if (id == null) //Se o Id for nulo, a pessoa fez a requisição de um jeito errado!
             {
                 return RedirectToAction(nameof(Error), new {message = "Id não foi fornecido"}); //Lembrar de personalizar o aviso do erro
             }
 
-            var obj = _vendedorService.FindById(id.Value); //Ele é um valor opcional
+            var obj = await _vendedorService.FindByIdAsync(id.Value); //Ele é um valor opcional
 
             if (obj == null) //Se o Id não existir
             {
@@ -80,31 +80,31 @@ namespace VendasApp.Controllers
             //Se até aqui tudo deu certo, eu quero que retorne esse obj 
             return View(obj);
         }
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) //Testando se existe 
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não foi fornecido" });
             }
 
-            var obj = _vendedorService.FindById(id.Value);
+            var obj = await _vendedorService.FindByIdAsync(id.Value);
             if (obj == null) //Testando se existe 
             {
                 return RedirectToAction(nameof(Error), new { message = "Id não encontrado" });
             }
             //Se passar pelos if, vou abrir a tela de edição:
 
-            List<Departamento> departamentos = _departamentoService.FindAll();
+            List<Departamento> departamentos = await _departamentoService.FindAllAsync();
             VendedorFormViewModel viewModel = new VendedorFormViewModel { Vendedor = obj, Departamentos = departamentos }; //Obj é o obj que buscamos no banco de dados (escrito logo acima no if)
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int? id, Vendedor vendedor)
+        public async Task<IActionResult> Edit(int? id, Vendedor vendedor)
         {
             if (!ModelState.IsValid) //Se NÃO for validado meu modelo, então retorna meu obj, até o usuario preencher direitinho a View!
             {
-                var departamentos = _departamentoService.FindAll();
+                var departamentos = await _departamentoService.FindAllAsync();
                 var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
                 return View(viewModel);
             }
@@ -115,7 +115,7 @@ namespace VendasApp.Controllers
             }
             try
             {
-                _vendedorService.Update(vendedor);
+                await _vendedorService.UpdateAsync(vendedor);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e) //Para não repetir as duas, chamei uma super Exception e dei um apelido para ela

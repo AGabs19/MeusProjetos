@@ -13,39 +13,41 @@ namespace VendasApp.Services
         {
             _context = context;
         }
-        public List<Vendedor> FindAll() //Estou usando a operação para encontrar 
+
+        public async Task<List<Vendedor>> FindAllAsync() //Estou usando a operação para encontrar 
         {
-            return _context.Vendedor.ToList(); //Ele vai acessar meus dados da tabela vendedor e vai transforma em lista
+            return await _context.Vendedor.ToListAsync(); //Ele vai acessar meus dados da tabela vendedor e vai transforma em lista
         }
-        public void Insert(Vendedor obj) //Para Inserir
+        public async Task InsertAsync(Vendedor obj) //Para Inserir
         {
             _context.Add(obj);
-            _context.SaveChanges();
+           await _context.SaveChangesAsync();
         }
-        public Vendedor FindById(int id) //Estou pedindo para localizar pelo Id 
+        public async Task<Vendedor> FindByIdAsync(int id) //Estou pedindo para localizar pelo Id 
         {
-            return _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefault(obj => obj.Id == id); //Usando o metodo FirstOrDefault e lambida (Linq)
+            return await _context.Vendedor.Include(obj => obj.Departamento).FirstOrDefaultAsync(obj => obj.Id == id); //Usando o metodo FirstOrDefault e lambida (Linq)
             //Include coloquei apos a criaçaõ da opção (model.Departamento.Nome) em Details.cshtml;
             //Eu estou incluindo o Departamento, ele faz join e busca o departamento!
             //É assim que faz eager loading;
             //Eager loading = Carregar outros objetos associados ao objeto principal por isso a inclusão;
         }
-        public void Remove(int id) 
+        public async Task RemoveAsync(int id) 
         {
-            var obj = _context.Vendedor.Find(id);
+            var obj = await _context.Vendedor.FindAsync(id);
             _context.Vendedor.Remove(obj); //Assim eu removo o obj do BDSet
-            _context.SaveChanges(); //Aqui eu salvo essa alteração no meu banco de dados e assim o objeto fica totslmente removido!
+            await _context.SaveChangesAsync(); //Aqui eu salvo essa alteração no meu banco de dados e assim o objeto fica totslmente removido!
         }
-        public void Update(Vendedor obj)  //Atualizar um vendedor
+        public async Task UpdateAsync(Vendedor obj)  //Atualizar um vendedor
         {
-            if (!_context.Vendedor.Any(x => x.Id == obj.Id))   //se nãooooo EXISTIR ! Any serve para para vê se existe registro no banco de dados com a condição lambida
+            bool hasAny = await _context.Vendedor.AnyAsync(x => x.Id == obj.Id);
+            if (!hasAny)   //se nãooooo EXISTIR ! Any serve para para vê se existe registro no banco de dados com a condição lambida
             {
                 throw new NotFoundException("Id não encontrado");
             }
             try //Se passar pelo if, então solicita a Atualização
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch (DbConcurrencyException e)
             {
