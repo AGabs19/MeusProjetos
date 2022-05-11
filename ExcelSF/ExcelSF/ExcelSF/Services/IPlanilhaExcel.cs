@@ -2,6 +2,8 @@
 {
     public interface IPlanilhaExcel
     {
-        string SalvarExcel(IFormFile Arquivo);
+        string InsertAsync(IFormFile Arquivo);
+        string DeleteAsync(IFormFile Arquivo);
+        string UpdateAsync(IFormFile Arquivo);
     }
 }
