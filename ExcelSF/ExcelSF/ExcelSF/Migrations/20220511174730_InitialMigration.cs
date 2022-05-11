@@ -1,12 +1,11 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using AppContext = ExcelSF.DataBase.AppContext;
 
 #nullable disable
 
 namespace ExcelSF.Migrations
 {
-    public partial class ExcelSF : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -102,6 +101,27 @@ namespace ExcelSF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Funcionario",
+                columns: table => new
+                {
+                    Id = table.Column<long>(type: "bigint", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CPF = table.Column<long>(type: "bigint", nullable: false),
+                    EnderecoId = table.Column<long>(type: "bigint", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Funcionario", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Funcionario_Endereco_EnderecoId",
+                        column: x => x.EnderecoId,
+                        principalTable: "Endereco",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Ferias",
                 columns: table => new
                 {
@@ -133,33 +153,6 @@ namespace ExcelSF.Migrations
                         name: "FK_Ferias_PeriodoAquisitivo_PeriodoAquisitivoId",
                         column: x => x.PeriodoAquisitivoId,
                         principalTable: "PeriodoAquisitivo",
-                        principalColumn: "Id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Funcionario",
-                columns: table => new
-                {
-                    Id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Nome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Sobrenome = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CPF = table.Column<long>(type: "bigint", nullable: false),
-                    TelefoneId = table.Column<long>(type: "bigint", nullable: true),
-                    EnderecoId = table.Column<long>(type: "bigint", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Funcionario", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Funcionario_Endereco_EnderecoId",
-                        column: x => x.EnderecoId,
-                        principalTable: "Endereco",
-                        principalColumn: "Id");
-                    table.ForeignKey(
-                        name: "FK_Funcionario_Telefone_TelefoneId",
-                        column: x => x.TelefoneId,
-                        principalTable: "Telefone",
                         principalColumn: "Id");
                 });
 
@@ -219,11 +212,6 @@ namespace ExcelSF.Migrations
                 name: "IX_Funcionario_EnderecoId",
                 table: "Funcionario",
                 column: "EnderecoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Funcionario_TelefoneId",
-                table: "Funcionario",
-                column: "TelefoneId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -233,6 +221,9 @@ namespace ExcelSF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Ferias");
+
+            migrationBuilder.DropTable(
+                name: "Telefone");
 
             migrationBuilder.DropTable(
                 name: "Cargo");
@@ -251,9 +242,6 @@ namespace ExcelSF.Migrations
 
             migrationBuilder.DropTable(
                 name: "Endereco");
-
-            migrationBuilder.DropTable(
-                name: "Telefone");
         }
     }
 }

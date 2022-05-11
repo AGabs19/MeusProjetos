@@ -193,14 +193,9 @@ namespace ExcelSF.Migrations
                     b.Property<string>("Sobrenome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TelefoneId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
-
-                    b.HasIndex("TelefoneId");
 
                     b.ToTable("Funcionario");
                 });
@@ -307,13 +302,7 @@ namespace ExcelSF.Migrations
                         .WithMany()
                         .HasForeignKey("EnderecoId");
 
-                    b.HasOne("ExcelSF.Models.Telefone", "Telefone")
-                        .WithMany()
-                        .HasForeignKey("TelefoneId");
-
                     b.Navigation("Endereco");
-
-                    b.Navigation("Telefone");
                 });
 #pragma warning restore 612, 618
         }

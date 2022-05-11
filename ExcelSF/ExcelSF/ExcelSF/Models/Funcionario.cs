@@ -9,9 +9,7 @@ namespace ExcelSF.Models
 		public string? Nome { get; set; }
 		public string? Sobrenome { get; set; }
 		public long CPF { get; set; }
-		public virtual Telefone? Telefone { get; set; }
-		//public long TelefoneId { get; set; }
-		public virtual Endereco? Endereco { get; set; }
-		//public long EnderecoId { get; set; }
+		ICollection<Telefone> Telefones { get; set; } //Um funcionario pode ter varios telefones, ligação de muitos para muitos!
+		public virtual Endereco? Endereco { get; set; } //Um funcionario pode ter um endereço
 	}
 }

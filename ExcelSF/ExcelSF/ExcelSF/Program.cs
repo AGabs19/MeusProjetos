@@ -8,6 +8,8 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Builder;
 using ExcelSF.Services;
+using System.Globalization;
+using Microsoft.AspNetCore.Localization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,17 +23,23 @@ builder.Services.AddSwaggerGen(c => // O c é de Configuração
     c.SwaggerDoc("v1",
         new Microsoft.OpenApi.Models.OpenApiInfo
         {
-            Title = "ImportExcel",
+            Title = "ExcelSF",
             Version = "v1",
             Description = "Importando uma planilha Excel para um Banco de Dados",
         });
-
-    //string caminhoXmlDoc = Path.Combine("https://localhost:7144/swagger/v1/swagger.json", $"{"Ferias.xls"}.xml");
-    //c.IncludeXmlComments(caminhoXmlDoc);
 });
 
 builder.Services.AddScoped<IPlanilhaExcel, PlanilhaExcel>();
+
 var app = builder.Build();
+
+var enUS = new CultureInfo("en-US");
+var localizationOptions = new RequestLocalizationOptions //Para trocar a localização e assim alterar o formato das minhas datas
+{
+    DefaultRequestCulture = new RequestCulture(enUS),
+    SupportedCultures = new List<CultureInfo> { enUS },
+    SupportedUICultures = new List<CultureInfo> { enUS }
+};
 
 if (app.Environment.IsDevelopment())
 {

@@ -13,8 +13,8 @@ using AppContext = ExcelSF.DataBase.AppContext;
 namespace ExcelSF.Migrations
 {
     [DbContext(typeof(AppContext))]
-    [Migration("20220511161526_ExcelSF")]
-    partial class ExcelSF
+    [Migration("20220511174730_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -195,14 +195,9 @@ namespace ExcelSF.Migrations
                     b.Property<string>("Sobrenome")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TelefoneId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("Id");
 
                     b.HasIndex("EnderecoId");
-
-                    b.HasIndex("TelefoneId");
 
                     b.ToTable("Funcionario");
                 });
@@ -309,13 +304,7 @@ namespace ExcelSF.Migrations
                         .WithMany()
                         .HasForeignKey("EnderecoId");
 
-                    b.HasOne("ExcelSF.Models.Telefone", "Telefone")
-                        .WithMany()
-                        .HasForeignKey("TelefoneId");
-
                     b.Navigation("Endereco");
-
-                    b.Navigation("Telefone");
                 });
 #pragma warning restore 612, 618
         }
