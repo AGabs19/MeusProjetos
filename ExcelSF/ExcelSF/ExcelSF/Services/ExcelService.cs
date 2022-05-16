@@ -1,17 +1,16 @@
-﻿using AppContext = ExcelSF.DataBase.AppContext;
-using ExcelSF.Models;
-using OfficeOpenXml;
+﻿using ExcelSF.Models;
+using ExcelSF.Services.Exceptions;
 using Ganss.Excel;
 using Microsoft.EntityFrameworkCore;
-using ExcelSF.Services.Exceptions;
+using AppContext = ExcelSF.DataBase.AppContext;
 
 namespace ExcelSF.Services
 {
-    public class PlanilhaExcel : IPlanilhaExcel
+    public class ExcelService : IExcelService
     {
         private readonly AppContext conexao;
 
-        public PlanilhaExcel(AppContext conexao)
+        public ExcelService(AppContext conexao)
         {
             this.conexao = conexao;
         }
@@ -107,70 +106,56 @@ namespace ExcelSF.Services
             }
             return stream;
         }
-        public async Task<List<Funcionario>> FindAllAsync() //Usei essa operação para encontrar
+        public string Insert(IFormFile arquivo)
         {
-            return await conexao.Funcionario.ToListAsync();  //Ele vai acessar meus dados da tabela vendedor e vai transforma em lista
-        }
-        public async Task InsertAsync(ExcelModel arquivo) //Para Inserir
-        {
-            conexao.Add(arquivo);
-            await conexao.SaveChangesAsync();
+            Stream arquivoaberto = AbrirExcel(arquivo);
+            if (arquivo == null)
+            {
+                return "o arquivo não possui dados";
+            }
+            return "ok";
         }
 
-        public async Task<Funcionario> FindByIdAsync(int id) //Estou pedindo para localizar pelo Id
+        public List<Funcionario> FindAll()
         {
-            return await conexao.Funcionario.Include(arquivo => arquivo.CPF).FirstOrDefaultAsync(arquivo => arquivo.Id == id); //Usando FirstOrDefault e lambida do linq
+            return this.conexao.Funcionario.ToList();
         }
-        public async Task RemoveAsync(int id)
+
+        public Funcionario FindById(long id)
+        {
+            return this.conexao.Funcionario.FirstOrDefault(obj => obj.Id == id);
+        }
+        public string Delete(long id)
         {
             try
             {
-                var arquivo = await conexao.Funcionario.FindAsync(id); //Procurando pelo Id
-                conexao.Funcionario.Remove(arquivo); //Aqui eu removo o arquivo do BDSet
-                await conexao.SaveChangesAsync(); //Eu salvo minha alteração no meu banco de dados e assim o que eu remover fica totalmente removido!
+                var obj = this.conexao.Funcionario.Find(id);
+                this.conexao.Funcionario.Remove(obj);
+                this.conexao.SaveChanges();
             }
-            catch(DbUpdateException e)
+            catch (DbUpdateException e)
             {
-                throw new IntegrityException("Não foi possivel excluir esse Funcionario!");
+                throw new IntegrityException("Não foi possivel deletar o Funcionario");
             }
+            return "ok";
         }
-        public async Task UpdateAsync(Funcionario arquivo) //Para atualizar um funcionario!
+        public string Update(Funcionario obj)
         {
-            bool hasAny = await conexao.Funcionario.AnyAsync(x => x.Id == arquivo.Id);
-            if(! hasAny) //Se NÃO existir, Any serve para vê se existe registro no banco de dados com a condição lambida!!!
+            bool hasAny = this.conexao.Funcionario.Any(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id não encontrado");
             }
-            try //Se passar pelo If entao aqui solicito atualização
+            try
             {
-                conexao.Update(arquivo);
-                await conexao.SaveChangesAsync();
+                this.conexao.Update(obj);
+                this.conexao.SaveChanges();
             }
             catch (DbConcurrencyException e)
             {
                 throw new DbConcurrencyException(e.Message);
             }
+            return "ok";
         }
-        //Se meu banco de dados der conflito de ambiguidade, a minha exception vai lançar um aviso, pois vai pegar o aviso do banco e transformar em um aviso meu, da minha exception!!!
-   
-
-        //public string SalvarExcel(IFormFile arquivo)
-        //{
-        //    Stream arquivoaberto = AbrirExcel(arquivo);
-        //    if (arquivo == null)
-        //    {
-        //        return "o arquivo não possui dados";
-        //    }
-           
-
-        //    return "ok";
-        //    ///testa se o arquivo tem dados
-        //    ///verifica se os dados estão nos lugares certos
-        //    ///faz a leitura dos dados
-        //    ///salvar em banco
-        //    ///retorna ok para quando não tiver erros
-
-        //}
-
     }
 }

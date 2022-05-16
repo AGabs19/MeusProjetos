@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Builder;
 using ExcelSF.Services;
 using System.Globalization;
 using Microsoft.AspNetCore.Localization;
+using ExcelSF.DataBase;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,12 +25,12 @@ builder.Services.AddSwaggerGen(c => // O c é de Configuração
         new Microsoft.OpenApi.Models.OpenApiInfo
         {
             Title = "ExcelSF",
-            Version = "v1",
+            Version = "v2",
             Description = "Importando uma planilha Excel para um Banco de Dados",
         });
 });
 
-builder.Services.AddScoped<IPlanilhaExcel, PlanilhaExcel>();
+builder.Services.AddScoped<IExcelService, ExcelService>();
 
 var app = builder.Build();
 
