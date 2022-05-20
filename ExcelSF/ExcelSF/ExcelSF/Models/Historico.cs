@@ -4,6 +4,8 @@ namespace ExcelSF.Models
 {
     public class Historico
     {
+        public bool Enabled { get; set; } = true;
+
         [Key()]
         public long Id { get; set; }
         public long QuantidadeDeDias { get; set; }

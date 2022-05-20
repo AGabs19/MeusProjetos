@@ -34,7 +34,7 @@ namespace VendasApp.Controllers
             if (!ModelState.IsValid) //Se NÃO for validado meu modelo, então retorna meu obj, até o usuario preencher direitinho a View!
             {
                 var departamentos = await _departamentoService.FindAllAsync();
-                var viewModel = new VendedorFormViewModel { Vendedor = vendedor, Departamentos = departamentos };
+                var viewModel = new VendedorFormViewModel{ Vendedor = vendedor, Departamentos = departamentos };
                 return View(viewModel);
             }
             await _vendedorService.InsertAsync(vendedor);

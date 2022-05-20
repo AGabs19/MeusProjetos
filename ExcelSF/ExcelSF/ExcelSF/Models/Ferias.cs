@@ -4,8 +4,11 @@ namespace ExcelSF.Models
 {
     public class Ferias
     {
+        public bool Enabled { get; set; } = true;
+
         [Key()]
         public long Id { get; set; }
+
         public virtual Autorizacao? Autorizacao { get; set; } //Ligação um para um
         public bool AdiantamentoDecimoTerceiro { get; set; }
         public virtual Historico? Historico { get; set; } //Ligação um para um

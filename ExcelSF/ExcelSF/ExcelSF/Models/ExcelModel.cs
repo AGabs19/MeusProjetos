@@ -1,12 +1,12 @@
-﻿using ExcelSF.Models.Enums;
+﻿using ExcelSF.Models;
 using System.ComponentModel.DataAnnotations;
 
 namespace ExcelSF.Models
 {
     public class ExcelModel
     {
-        public Status status { get; set; }
-
+        public string Status { get; set; }
+       
         [Required(ErrorMessage = "{0} obrigatório")] //{0} = Nome + obrigátorio!
         [StringLength(60, MinimumLength = 3, ErrorMessage = "O tamanho do {0} deve ser de {2} a {1}")] //Colocando limites. {0} = Nome, {1} = Max, {2} = Min
         public string Nome { get; set; }

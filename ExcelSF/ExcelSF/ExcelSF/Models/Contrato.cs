@@ -4,6 +4,8 @@ namespace ExcelSF.Models
 {
     public class Contrato
     {
+        public bool Enabled { get; set; } = true;
+
         [Key()]
         public long Id { get; set; }
 
@@ -16,6 +18,6 @@ namespace ExcelSF.Models
         [DisplayFormat(DataFormatString = "{0:F2}")]
         public Double Salario { get; set; }
         public virtual Cargo? Cargo { get; set; }
-        public virtual Funcionario? Funcionario { get; set; }
+
     }
 }

@@ -4,6 +4,8 @@ namespace ExcelSF.Models
 {
     public class Autorizacao
     {
+        public bool Enabled { get; set; } = true;
+
         [Key()]
         public long Id { get; set; }
         public string? ObservacaoFuncionario { get; set; }

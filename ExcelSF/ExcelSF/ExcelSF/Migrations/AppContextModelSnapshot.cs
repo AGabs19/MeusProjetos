@@ -31,6 +31,9 @@ namespace ExcelSF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<long>("IdGerente1")
                         .HasColumnType("bigint");
 
@@ -65,6 +68,9 @@ namespace ExcelSF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<string>("Tipo")
                         .HasColumnType("nvarchar(max)");
 
@@ -90,8 +96,8 @@ namespace ExcelSF.Migrations
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("FuncionarioId")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
 
                     b.Property<double>("Salario")
                         .HasColumnType("float");
@@ -99,8 +105,6 @@ namespace ExcelSF.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CargoId");
-
-                    b.HasIndex("FuncionarioId");
 
                     b.ToTable("Contrato");
                 });
@@ -113,16 +117,24 @@ namespace ExcelSF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
-                    b.Property<long>("CEP")
+                    b.Property<long?>("CEP")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.Property<string>("Complemento")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
 
                     b.Property<string>("Longadouro")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long>("NumeroCasa")
+                    b.Property<long?>("NumeroCasa")
+                        .IsRequired()
                         .HasColumnType("bigint");
 
                     b.HasKey("Id");
@@ -156,6 +168,9 @@ namespace ExcelSF.Migrations
                     b.Property<DateTime>("DataInicio2")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<long?>("HistoricoId")
                         .HasColumnType("bigint");
 
@@ -184,18 +199,40 @@ namespace ExcelSF.Migrations
                     b.Property<long>("CPF")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("ContratoId")
+                        .HasColumnType("bigint");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<long?>("EnderecoId")
                         .HasColumnType("bigint");
 
+                    b.Property<long?>("FeriasId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Nome")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
 
                     b.Property<string>("Sobrenome")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<long?>("TelefoneId")
+                        .HasColumnType("bigint");
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ContratoId");
+
                     b.HasIndex("EnderecoId");
+
+                    b.HasIndex("FeriasId");
+
+                    b.HasIndex("TelefoneId");
 
                     b.ToTable("Funcionario");
                 });
@@ -207,6 +244,9 @@ namespace ExcelSF.Migrations
                         .HasColumnType("bigint");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
 
                     b.Property<long>("QuantidadeDeDias")
                         .HasColumnType("bigint");
@@ -233,6 +273,9 @@ namespace ExcelSF.Migrations
                     b.Property<DateTime>("DataDaContratacao")
                         .HasColumnType("datetime2");
 
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
+
                     b.Property<DateTime>("UltimoPeriodo")
                         .HasColumnType("datetime2");
 
@@ -250,7 +293,12 @@ namespace ExcelSF.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
 
                     b.Property<string>("Descricao")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasMaxLength(60)
+                        .HasColumnType("nvarchar(60)");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("bit");
 
                     b.Property<long>("Numero")
                         .HasColumnType("bigint");
@@ -266,13 +314,7 @@ namespace ExcelSF.Migrations
                         .WithMany()
                         .HasForeignKey("CargoId");
 
-                    b.HasOne("ExcelSF.Models.Funcionario", "Funcionario")
-                        .WithMany()
-                        .HasForeignKey("FuncionarioId");
-
                     b.Navigation("Cargo");
-
-                    b.Navigation("Funcionario");
                 });
 
             modelBuilder.Entity("ExcelSF.Models.Ferias", b =>
@@ -298,11 +340,29 @@ namespace ExcelSF.Migrations
 
             modelBuilder.Entity("ExcelSF.Models.Funcionario", b =>
                 {
+                    b.HasOne("ExcelSF.Models.Contrato", "Contrato")
+                        .WithMany()
+                        .HasForeignKey("ContratoId");
+
                     b.HasOne("ExcelSF.Models.Endereco", "Endereco")
                         .WithMany()
                         .HasForeignKey("EnderecoId");
 
+                    b.HasOne("ExcelSF.Models.Ferias", "Ferias")
+                        .WithMany()
+                        .HasForeignKey("FeriasId");
+
+                    b.HasOne("ExcelSF.Models.Telefone", "Telefone")
+                        .WithMany()
+                        .HasForeignKey("TelefoneId");
+
+                    b.Navigation("Contrato");
+
                     b.Navigation("Endereco");
+
+                    b.Navigation("Ferias");
+
+                    b.Navigation("Telefone");
                 });
 #pragma warning restore 612, 618
         }

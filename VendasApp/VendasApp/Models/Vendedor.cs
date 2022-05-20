@@ -56,7 +56,7 @@ namespace VendasApp.Models
         {
             Vendas.Remove(rv);
         }
-        public double TotalVendas(DateTime inicial, DateTime final) //Calculando o total de vendas de um vendedos, ussando Linq
+        public double TotalVendas(DateTime inicial, DateTime final) //Calculando o total de vendas de um vendedos, usando Linq
         {
             return Vendas.Where(rv => rv.Data >= inicial && rv.Data <= final).Sum(rv => rv.Quantia);
             //Retorno do Total de Vendas desse vendedor, nesse periodo de Data Inicial e Final;

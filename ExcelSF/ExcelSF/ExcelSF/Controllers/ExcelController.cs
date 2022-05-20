@@ -25,90 +25,92 @@ namespace ExcelSF.Controllers
             this.services = services;
             this.conexao = conexao;
         }
-        //public ActionResult Index()
-        //{
-        //    var list = this.services.FindAll();
-        //    return View(list);
-        //}
-
         [HttpPost]
         public ActionResult PegarArquivo(IFormFile arquivo)
         {
-            if (!ModelState.IsValid)
+            if (!ModelState.IsValid) //Quando o modelo NÃO for valido!
             {
-                return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
+                return StatusCode(StatusCodes.Status204NoContent, "Por Favor selecione um modelo valido!");
             }
-            this.services.Insert(arquivo);
+            this.services.Excel(arquivo);
             return StatusCode(StatusCodes.Status200OK, "Executado com sucesso!");
         }
+
+
+        //O CODIGO ABAIXO EU ESCREVI PARA FAZER REQUISIÇÕA SEPARADA!!!
+        //[HttpGet]
+        //public ActionResult LocalizarID(long id)
+        //{
+        //    var list = this.services.FindById(id);
+        //    return StatusCode(StatusCodes.Status200OK, "Id encontrado");
+        //}
+        //[HttpDelete]
         //public ActionResult DeletarArquivo(long? id)
         //{
         //    if (id == null) //Se o Id for nulo, passou de um jeito errado
         //    {
         //        return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
         //    }
-        //    var obj = this.services.FindById(id.Value);
+
+        //    var obj = this.services.FindById(id.Value); //FindById para localizar pelo Id e como declarei que pode ser nulo ? eu uso o .Value
+
         //    if (obj == null) //Se ele já não existir
         //    {
         //        return StatusCode(StatusCodes.Status204NoContent, "Id não encontrado!");
         //    }
-        //    return View(obj); //Se tudo deu certo até aqui, quero que me retorne isso!
-        //}
+            
+        //    try
+        //    {
+        //        this.services.Delete(id.Value);
+        //        return StatusCode(StatusCodes.Status200OK, "Funcionario Deletado"); //Se tudo der certo até aqui, quero que me retorne isso!
+        //    }
+        //    catch(IntegrityException e)
+        //    {
+        //        throw new IntegrityException(e.Message);
+        //    } 
+        //} 
 
-        [HttpPut]
-        public ActionResult DeletarArquivo(long id)
-        {
-            try
-            {
-                this.services.Delete(id);
-                return StatusCode(StatusCodes.Status200OK, "Funcionario Deletado");
-            }
-            catch(IntegrityException e)
-            {
-                throw new IntegrityException(e.Message);
-            }
-
-        }
-        //public ActionResult AtualizarArquivo(long? id)
+        //[HttpPut]
+        //public ActionResult AtualizarArquivo(long? id, Funcionario funcionario)
         //{
+        //    if (!ModelState.IsValid) //Se o modelo não for valido, quero que me retorne isso!
+        //    {
+        //        return StatusCode(StatusCodes.Status200OK, "Id não fornecido");
+        //        //return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
+        //    }
+
+        //    if (id != funcionario.Id) //se o id for diferente!
+        //    {
+        //        return StatusCode(StatusCodes.Status200OK, "id não corresponde");
+
+        //        //return statuscode(statuscodes.status204nocontent, "id não corresponde");
+        //    }
+
         //    if (id == null) //Se o Id for nulo, passou de um jeito errado
         //    {
-        //        return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
+        //        return StatusCode(StatusCodes.Status200OK, "Id não fornecido");
+        //        //return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
         //    }
-
         //    var obj = this.services.FindById(id.Value);
 
         //    if (obj == null) //Se ele já não existir
         //    {
-        //        return StatusCode(StatusCodes.Status204NoContent, "Id não encontrado!");
+        //        return StatusCode(StatusCodes.Status200OK, "Id não encontrado!");
+        //        //return StatusCode(StatusCodes.Status204NoContent, "Id não encontrado!");
         //    }
-        //    return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido"); ;
+        //    try
+        //    {
+        //        this.services.Update(funcionario);
+        //        return StatusCode(StatusCodes.Status200OK, "Funcionario alterado com sucesso!");
+        //    }
+        //    catch (NotFoundException e)
+        //    {
+        //        throw new DbConcurrencyException(e.Message); //São as excepetion personalizadas que criei!
+        //    }
+        //    catch (DbConcurrencyException e)
+        //    {
+        //        throw new DbConcurrencyException(e.Message);
+        //    }
         //}
-        [HttpDelete]
-        public ActionResult AtualizarArquivo(long id, Funcionario funcionario)
-        {
-            if (!ModelState.IsValid)
-            {
-                return StatusCode(StatusCodes.Status204NoContent, "Id não fornecido");
-            }
-
-            if (id != funcionario.Id) //Se o Id diferente!
-            {
-                return StatusCode(StatusCodes.Status204NoContent, "Id não corresponde");
-            }
-            try
-            {
-                this.services.Update(funcionario);
-                return StatusCode(StatusCodes.Status200OK, "Funcionario alterado com sucesso!");
-            }
-            catch(NotFoundException e)
-            {
-                throw new DbConcurrencyException(e.Message);
-            }
-            catch(DbConcurrencyException e)
-            {
-                throw new DbConcurrencyException(e.Message);
-            }
-        }
     }
 }

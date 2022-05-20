@@ -25,7 +25,8 @@ namespace ExcelSF.DataBase
         public DbSet<PeriodoAquisitivo> PeriodoAquisitivo { get; set; }
         public DbSet<Telefone> Telefone { get; set; }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder) //Para criar meus Id automaticamente!
         {
             modelBuilder.Entity<Autorizacao>()
            .Property(x => x.Id)

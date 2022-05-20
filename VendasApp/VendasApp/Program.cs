@@ -31,12 +31,13 @@ var localizationOptions = new RequestLocalizationOptions //Para trocar a Localiz
     SupportedCultures = new List<CultureInfo> { enUS },
     SupportedUICultures = new List<CultureInfo> { enUS }
 };
-app.UseRequestLocalization(localizationOptions); 
-
+app.UseRequestLocalization(localizationOptions);
+app.Services.CreateScope().ServiceProvider.GetRequiredService<PopularService>().Popular();
 if (!app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
     PopularService.Popular();
+    //app.Services.CreateScope().ServiceProvider.GetRequiredService<PopularService>().Popular();
 }
 else
 {

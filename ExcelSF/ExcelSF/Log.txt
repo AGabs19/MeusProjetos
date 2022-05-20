@@ -1,0 +1,63 @@
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Teste
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+System.Func`2[ExcelSF.Models.ExcelModel,System.String]
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
+Importando uma tabela Excel
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Inseridos com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Atualizados com Sucesso!
+System.Func`2[ExcelSF.Models.ExcelModel,System.String] Arquivos Excluidos com Sucesso!
